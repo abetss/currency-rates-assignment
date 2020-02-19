@@ -36,5 +36,3 @@ Box.propTypes = {
 	...propTypes.flexbox,
 	...propTypes.position
 };
-
-export default Box;

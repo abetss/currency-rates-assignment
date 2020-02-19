@@ -6,7 +6,7 @@ import { configureStore } from './store';
 import { GlobalStyle } from './GlobalStyle';
 
 import { theme } from '../design-system';
-import { RatesList } from '../features/rates/components';
+import { RatesListContainer } from '../features/rates';
 
 const store = configureStore();
 
@@ -15,7 +15,7 @@ export const App = () => {
     <Provider store={store}>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <RatesList />
+        <RatesListContainer />
       </ThemeProvider>
     </Provider>
   );

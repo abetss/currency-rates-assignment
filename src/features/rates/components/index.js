@@ -1,1 +1,1 @@
-export * from './RatesList.component';
+export * from './Currency.component';

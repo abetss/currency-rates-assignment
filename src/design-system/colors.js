@@ -4,7 +4,7 @@ export const colors = {
   secondary: '#ffb700',
   'secondary-variant': '#ffd700',
   background: '#fff',
-  surface: '#fffceb',
+  surface: '#f3f3f3',
   error: '#ff4136',
   'on-primary': '#fff',
   'on-secondary': '#fff',

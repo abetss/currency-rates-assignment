@@ -1,7 +1,9 @@
 import React from 'react';
 import { css } from '@styled-system/css';
+import PropTypes from 'prop-types';
 
 import { Box, Text } from './primitive-components';
+import { layoutProps } from '../utils/propTypes.constants';
 
 export const PrimaryButton = ({ title, onClick, ...props }) => (
   <Box
@@ -27,3 +29,9 @@ export const PrimaryButton = ({ title, onClick, ...props }) => (
     </Text>
   </Box>
 );
+
+PrimaryButton.propTypes = {
+  title: PropTypes.string,
+  onClick: PropTypes.func,
+  ...layoutProps
+};

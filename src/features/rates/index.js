@@ -1,2 +1,2 @@
 export * from './connectors';
-export * from './components';
+export * from './RatesList.container';

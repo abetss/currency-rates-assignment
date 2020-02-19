@@ -1,3 +1,3 @@
-export * from './box.component';
-export * from './flex.component';
-export * from './text.component';
+export * from './Box.component';
+export * from './Flex.component';
+export * from './Text.component';
