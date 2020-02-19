@@ -1,20 +1,8 @@
 import React from 'react';
-import {
-  Flex,
-  Box,
-  Heading1,
-  PrimaryButton,
-  PrimaryText,
-  Subtitle,
-  Loading
-} from '../../design-system';
+import { Flex, Box, Heading1, PrimaryButton, PrimaryText, Subtitle, Loading } from '../../design-system';
 import { Currency } from './components/Currency.component';
 
-export const RatesList = ({
-  fetchRates,
-  rates: { list, baseCurrency, lastUpdate },
-  shouldShow
-}) => {
+export const RatesList = ({ fetchRates, rates: { list, baseCurrency, lastUpdate }, shouldShow }) => {
   return (
     <Flex justifyContent="center" m={2} data-test="rates">
       <Box width={4}>
@@ -34,16 +22,10 @@ export const RatesList = ({
           )}
         </Flex>
 
-        {shouldShow.loadButton && (
-          <PrimaryButton title="Load rates" onClick={fetchRates} />
-        )}
+        {shouldShow.loadButton && <PrimaryButton title="Load rates" onClick={fetchRates} />}
         {shouldShow.loading && <Loading title="Loading rates" />}
         {shouldShow.rates && (
-          <Flex
-            flexDirection="column"
-            textAlign="center"
-            data-test="rates-list"
-          >
+          <Flex flexDirection="column" textAlign="center" data-test="rates-list">
             {list.map(({ currency, rate }, index, array) => (
               <Currency
                 currency={currency}
