@@ -1,11 +1,11 @@
-import { initialState, ratesReducer } from './rates.reducer';
+import { initialRatesState, ratesReducer } from './rates.reducer';
 import { HTTP_REQUEST_STATUS } from '../../../core/connectors';
 import { FETCH_RATES } from './rates.connectors.constants';
 
 describe('rates.reducer', () => {
   it(`should return default state
           when action type does not match any of the reducers`, () => {
-    expect(ratesReducer(undefined, {})).toEqual(initialState);
+    expect(ratesReducer(undefined, {})).toEqual(initialRatesState);
   });
 
   describe('should return state with requestStatus in progress', () => {
@@ -14,7 +14,7 @@ describe('rates.reducer', () => {
       payload: null
     };
     const expected = {
-      ...initialState,
+      ...initialRatesState,
       requestStatus: HTTP_REQUEST_STATUS.IN_PROGRESS
     };
 
@@ -27,7 +27,7 @@ describe('rates.reducer', () => {
       expect(
         ratesReducer(
           {
-            ...initialState,
+            ...initialRatesState,
             requestStatus: HTTP_REQUEST_STATUS.IN_PROGRESS
           },
           action
@@ -57,7 +57,7 @@ describe('rates.reducer', () => {
     };
 
     expect(ratesReducer(undefined, action)).toEqual({
-      ...initialState,
+      ...initialRatesState,
       requestStatus: HTTP_REQUEST_STATUS.ERRORED
     });
   });
