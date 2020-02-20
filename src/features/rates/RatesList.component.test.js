@@ -3,20 +3,34 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { RatesList } from './RatesList.component';
 
-const createIsElementVisible = (reference, elementName) => (wrapper, shouldSee) => {
-  it(`${elementName} visibility should be ${shouldSee}`, () => {
-    const element = wrapper.find(reference).first();
-    if (shouldSee) {
+const createAssertElement = (reference, elementName) => (wrapper, { visible, containedText }) => {
+  if (visible && !containedText) {
+    it(`${elementName} visibility should be ${visible}`, async () => {
+      const element = wrapper.find(reference).first();
+      expect(element.exists()).toBe(visible);
+    });
+  }
+
+  if (containedText) {
+    it(`${elementName} should contain expected text`, async () => {
+      const element = wrapper.find(reference).first();
       expect(element.exists()).toBeTruthy();
-    } else {
-      expect(element.exists()).toBeFalsy();
-    }
-  });
+      expect(
+        element
+          .text()
+          .toLowerCase()
+          .includes(containedText.toLowerCase())
+      ).toBeTruthy();
+    });
+  }
 };
 
-const isLoadButtonVisible = createIsElementVisible('PrimaryButton', 'Load button');
-const isRatesListVisible = createIsElementVisible('[data-test="rates-list"]', 'Rates List');
-const isLoadingVisible = createIsElementVisible('Loading', 'Loading');
+const assertLoadButton = createAssertElement('PrimaryButton', 'Load button');
+const assertRatesList = createAssertElement('[data-test="rates-list"]', 'Rates List');
+const assertLoading = createAssertElement('Loading', 'Loading');
+const assertHeader = createAssertElement('Heading1', 'header');
+const assertRatesBase = createAssertElement('[data-test="rates-base"]', 'Rates base');
+const assertLastUpdate = createAssertElement('[data-test="rates-date"]', 'Last update');
 
 describe('RatesList', () => {
   const render = props =>
@@ -42,9 +56,10 @@ describe('RatesList', () => {
       }
     });
 
-    isLoadButtonVisible(wrapper, true);
-    isRatesListVisible(wrapper, false);
-    isLoadingVisible(wrapper, false);
+    assertHeader(wrapper, { visible: true, containedText: 'Exchange Rates' });
+    assertLoadButton(wrapper, { visible: true, containedText: 'Load Rates' });
+    assertRatesList(wrapper, { visible: false });
+    assertLoading(wrapper, { visible: false });
 
     afterAll(() => {
       wrapper.unmount();
@@ -60,9 +75,10 @@ describe('RatesList', () => {
       }
     });
 
-    isLoadButtonVisible(wrapper, false);
-    isRatesListVisible(wrapper, false);
-    isLoadingVisible(wrapper, true);
+    assertHeader(wrapper, { visible: true, containedText: 'Exchange Rates' });
+    assertLoadButton(wrapper, { visible: false });
+    assertRatesList(wrapper, { visible: false });
+    assertLoading(wrapper, { visible: true });
 
     afterAll(() => {
       wrapper.unmount();
@@ -88,11 +104,14 @@ describe('RatesList', () => {
       }
     });
 
-    isLoadButtonVisible(wrapper, false);
-    isRatesListVisible(wrapper, true);
-    isLoadingVisible(wrapper, false);
+    assertHeader(wrapper, { visible: true, containedText: 'Exchange Rates' });
+    assertLoadButton(wrapper, { visible: false });
+    assertRatesList(wrapper, { visible: true });
+    assertLoading(wrapper, { visible: false });
+    assertRatesBase(wrapper, { visible: true, containedText: mockRates.baseCurrency });
+    assertLastUpdate(wrapper, { visible: true, containedText: mockRates.lastUpdate });
 
-    it('displays all the given rates as list of Currencies', () => {
+    it('displays all the given rates as pair of currency and its rate', () => {
       const currencies = wrapper.find('[data-test="rates-list"]').find('Currency');
       expect(currencies.length).toBe(3);
 
@@ -111,18 +130,6 @@ describe('RatesList', () => {
             .includes(mockRate.rate)
         ).toBeTruthy();
       });
-    });
-
-    it('displays base currency', () => {
-      const baseCurrency = wrapper.find('[data-test="rates-base"]').first();
-      expect(baseCurrency.exists).toBeTruthy();
-      expect(baseCurrency.text().includes(mockRates.baseCurrency)).toBeTruthy();
-    });
-
-    it('displays base currency', () => {
-      const baseCurrency = wrapper.find('[data-test="rates-date"]').first();
-      expect(baseCurrency.exists).toBeTruthy();
-      expect(baseCurrency.text().includes(mockRates.lastUpdate)).toBeTruthy();
     });
 
     afterAll(() => {
