@@ -27,7 +27,10 @@ export const ModalConductor = ({ isModalOpen, hideModal, modalType, modalProps: 
     shouldFocusAfterRender={true}
     onRequestClose={hideModal}
     ariaHideApp={false}
+    data-test="modal"
   >
-    {modalType === MODAL_TYPE.ERROR_MODAL && <ErrorModal message={message} onCloseButtonClick={hideModal} />}
+    {modalType === MODAL_TYPE.ERROR_MODAL && (
+      <ErrorModal message={message} onCloseButtonClick={hideModal} data-test="error-modal" />
+    )}
   </ReactModal>
 );

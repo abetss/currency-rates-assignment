@@ -6,7 +6,7 @@ export const ErrorModal = ({ message, onCloseButtonClick }) => (
     <Heading2>Error!</Heading2>
     <PrimaryText>{message}</PrimaryText>
     <Flex justifyContent="flex-end">
-      <PrimaryButton title="Close" mt={3} width={3} onClick={onCloseButtonClick} />
+      <PrimaryButton title="Close" mt={3} width={3} onClick={onCloseButtonClick} data-test="error-modal-close-btn" />
     </Flex>
   </Flex>
 );

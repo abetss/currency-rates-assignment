@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './app';
+import { App, configureStore } from './app';
+import { theme } from './design-system';
 
-const renderApp = () =>
-  ReactDOM.render(<App />, document.getElementById('root'));
+const store = configureStore();
+
+const renderApp = () => ReactDOM.render(<App store={store} theme={theme} />, document.getElementById('root'));
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {
   module.hot.accept('./app/App', renderApp);
