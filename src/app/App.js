@@ -7,6 +7,7 @@ import { GlobalStyle } from './GlobalStyle';
 
 import { theme } from '../design-system';
 import { RatesListContainer } from '../features/rates';
+import { ModalContainer } from '../features/modal';
 
 const store = configureStore();
 
@@ -16,6 +17,7 @@ export const App = () => {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <RatesListContainer />
+        <ModalContainer />
       </ThemeProvider>
     </Provider>
   );

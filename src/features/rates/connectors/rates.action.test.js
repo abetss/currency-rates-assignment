@@ -1,5 +1,5 @@
 import { fetchRates } from './rates.action';
-import { FETCH_RATES } from './rates.connectors.constants';
+import { FETCH_RATES } from '../../../core/rates';
 
 describe('rates actions', () => {
   it('should create an action to add a todo', () => {

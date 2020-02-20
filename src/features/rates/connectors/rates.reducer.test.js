@@ -1,6 +1,6 @@
 import { initialRatesState, ratesReducer } from './rates.reducer';
 import { HTTP_REQUEST_STATUS } from '../../../core/connectors';
-import { FETCH_RATES } from './rates.connectors.constants';
+import { FETCH_RATES } from '../../../core/rates';
 
 describe('rates.reducer', () => {
   it(`should return default state

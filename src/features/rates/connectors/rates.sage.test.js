@@ -1,7 +1,8 @@
 import { runSaga } from 'redux-saga';
 import { fetchRates } from './rates.saga';
 import * as httpUtils from '../../../core/connectors/http.utils';
-import { FETCH_RATES, RATES_ENDPOINTS } from './rates.connectors.constants';
+import { FETCH_RATES } from '../../../core/rates';
+import { RATES_ENDPOINTS } from './rates.connectors.constants';
 
 const flushPromises = () => new Promise(resolve => setImmediate(resolve));
 

@@ -1,5 +1,5 @@
 import { HTTP_REQUEST_STATUS } from '../../../core/connectors';
-import { FETCH_RATES } from './rates.connectors.constants';
+import { FETCH_RATES } from '../../../core/rates';
 
 export const initialRatesState = {
   list: [],

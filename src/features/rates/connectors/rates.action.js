@@ -1,4 +1,4 @@
-import { FETCH_RATES } from './rates.connectors.constants';
+import { FETCH_RATES } from '../../../core/rates';
 
 export const fetchRates = () => ({
   type: FETCH_RATES.START,

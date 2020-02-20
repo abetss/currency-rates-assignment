@@ -113,7 +113,7 @@ describe('RatesList', () => {
       });
     });
 
-    it('displayss base currency', () => {
+    it('displays base currency', () => {
       const baseCurrency = wrapper.find('[data-test="rates-base"]').first();
       expect(baseCurrency.exists).toBeTruthy();
       expect(baseCurrency.text().includes(mockRates.baseCurrency)).toBeTruthy();

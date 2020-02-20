@@ -1,6 +1,7 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { httpGet } from '../../../core/connectors';
-import { FETCH_RATES, RATES_ENDPOINTS } from './rates.connectors.constants';
+import { FETCH_RATES } from '../../../core/rates';
+import { RATES_ENDPOINTS } from './rates.connectors.constants';
 
 export function* fetchRates() {
   const url = RATES_ENDPOINTS.LATEST;
